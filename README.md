@@ -1,4 +1,4 @@
-# Satellite Imagery-Based Property Valuation 🏠🛰️
+# Satellite Imagery-Based Property Valuation
 
 ## Overview
 This project is a **Multimodal Regression Pipeline** that predicts property market values by combining **tabular data** (traditional housing features) with **satellite imagery** (visual environmental context). By integrating "curb appeal" and neighborhood characteristics (green cover, road density) into the pricing model, we achieve higher accuracy than traditional data-only models.
