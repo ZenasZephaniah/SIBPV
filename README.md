@@ -18,7 +18,7 @@ This project implements a **Multimodal Regression Pipeline** that predicts prope
 
 ## Setup Instructions 
 
-### 1.Prerequisites
+### 1. Prerequisites
 * **Python 3.10+**
 * **Recommended:** GPU environment (Google Colab T4 or local CUDA).
 
