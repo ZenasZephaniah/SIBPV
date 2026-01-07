@@ -1,7 +1,7 @@
 # Satellite Imagery-Based Property Valuation (SIBPV)
 
-**Author:** Dara Zenas Zephaniah
-**Enrollment Number:** 23321010
+* **Author:** Dara Zenas Zephaniah
+* **Enrollment Number:** 23321010
 
 ## Project Overview
 This project implements a **Multimodal Regression Pipeline** that predicts property prices by fusing tabular real estate data with satellite imagery. By processing visual environmental context (greenery, road density) alongside traditional housing features, the model captures "curb appeal" value drivers that pure tabular models miss.
