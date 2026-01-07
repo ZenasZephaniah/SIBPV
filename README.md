@@ -1,41 +1,46 @@
-# Satellite Imagery-Based Property Valuation
+# Satellite Imageery-Based Property Valuation (SIBPV)
 
-## Overview
-This project is a **Multimodal Regression Pipeline** that predicts property market values by combining **tabular data** (traditional housing features) with **satellite imagery** (visual environmental context). By integrating "curb appeal" and neighborhood characteristics (green cover, road density) into the pricing model, we achieve higher accuracy than traditional data-only models.
+**Author:** Dara Zenas Zephaniah
+**Enrollment Number:** 23321010
 
-## Objective
-- **Predict:** Property value (Target: `price`).
-- **Input:** Hybrid dataset of Tabular Features (bedrooms, sqft) + Satellite Images (fetched via Lat/Long).
-- **Model:** Late-Fusion Architecture (ResNet18 CNN + MLP).
-- **Explainability:** Grad-CAM visualizations to interpret visual value drivers.
+## Project Overview
+This project implements a **Multimodal Regression Pipeline** that predicts property prices by fusing tabular real estate data with satellite imagery. By processing visual enviromental context (greenery, road density) alongside traidtional housing features, the model captures "curb appeal" value drivers that pure tabular models miss.
 
-## Tech Stack
-- **Deep Learning:** PyTorch, torchvision (ResNet18)
-- **Data Handling:** Pandas, NumPy
-- **Image Processing:** OpenCV, PIL
-- **Visualization:** Matplotlib, Grad-CAM
-- **Environment:** Google Colab (T4 GPU)
+## Repository Structure 
+* **`src/`**: Folder containing modular source code (`baseline.py`,`config.py`,`datafetcher.py`,`datasets.py`,`gradcam.py`,`model.py`)
+* **`23321010_final.csv`**: The final prediction file containing `id` and `predicted price`.
+* **`23321010_report.pdf`**
+* **`Full_Project_Implementation.ipynb`**
+* **`baseline.py`**: A script reproducing the Tabular-Only XGBoost baseline results.
+* **`datafetcher.py`**:
+* **`model_training.ipynb`**:
+* **`model_training.ipynb`**:
 
-## Methodology
-1. **Data Acquisition:**
-   - Tabular data from King County housing dataset.
-   - Satellite images fetched programmatically using **ESRI World Imagery** via Lat/Lon coordinates.
-2. **Preprocessing:**
-   - Tabular: Standard scaling (Z-score normalization).
-   - Images: Resized to 224x224, normalized to ImageNet standards.
-3. **Model Architecture:**
-   - **Visual Branch:** ResNet18 (pretrained) extracts a 512-dim feature vector.
-   - **Tabular Branch:** 3-layer MLP extracts a 128-dim feature vector.
-   - **Fusion:** Vectors are concatenated -> Final Regression Head -> Price Prediction.
+## Setup Instructions 
 
-## Results
-- **Model R² Score:** 0.846 (84.6%)
-- **Validation RMSE:** 136,123
-- **Performance:** The fusion model successfully integrates visual context, maintaining high accuracy even when introduced to noisy unstructured image data.
+### 1.Prerequisites
+* **Python 3.10+**
+* **Recommended:** GPU environment (Google Colab T4 or local CUDA).
 
-## How to Run
-1. Clone the repository.
-2. Install dependencies: `pip install -r requirements.txt` (or use the provided script).
-3. Run the training pipeline:
-   ```bash
-   python train.py
+### 2. Installation
+Clone the repository and install the required dependencies:
+```bash
+git clone [https://github.com/ZenasZephaniah/SIBPV.git](https://github.com/ZenasZephaniah/SIBPV.git)
+cd SIBPV
+pip install torch torchvision pandas numpy opencv-python matplotlib scikit-learn tqdm xgboost openpyxl requests
+```
+### 3. How to Run Code
+**Step 1: Download Satellite Images** Run the fetcher script to populate the `data/satellite` directory. It uses intelligent caching to avoid re-downloading existing images.
+```
+python data_fetcher.py
+```
+**Step 2: Preprocessing & Training** You can run the full pipeline using the main training script. The script handles data loading, preprocessing(scaling),model training, and generates the final `23321010.csv`
+```
+python train.py
+````
+Output: This will generate `23321010_final.csv` in the `outputs/` folder (or root, depending on config)
+**Step 3: Verify Baseline Results** To reduce the comparison metrics cited in the report (Tabular-Only vs Multimodal), run the baseline script:
+```
+python baseline.py
+```
+
