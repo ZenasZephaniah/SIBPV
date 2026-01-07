@@ -157,12 +157,11 @@ def main():
     download(pd.concat([train_df, test_df], axis=0))
 
 
-# RUN DIRECTLY
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.parse_args()
-    main()
-
-# Example CSV load
-    df = pd.read_csv("data/coordinates.csv")  
-    download(df)
+    # This code only runs if you type 'python data_fetcher.py'
+    # It will NOT run if imported by train.py
+    if os.path.exists("data/coordinates.csv"):
+        df = pd.read_csv("data/coordinates.csv")  
+        download(df)
+    else:
+        print("Test file 'data/coordinates.csv' not found. Skipping test run.")
