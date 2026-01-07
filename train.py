@@ -164,12 +164,12 @@ def main():
             img = img.to(cfg.device)
             tab = tab.to(cfg.device)
 
-            pred = model(img, tab).cpu().numpy()
+            pred = model(img, tab).cpu().numpy().flatten()
             preds.extend(pred.tolist())
             ids.extend(pid.tolist())
     sub = pd.DataFrame({"id": ids,"predicted_price": preds})
-    sub.to_csv(os.path.join(cfg.output_dir, "submission.csv"),index=False)
-    print("Saved outputs/submission.csv")
+    sub.to_csv(os.path.join(cfg.output_dir, "23321010_final.csv"),index=False)
+    print("Saved outputs/23321010_final.csv")
 
     # Grad-CAM
     run_gradcam(model, val_ds)
