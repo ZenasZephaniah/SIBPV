@@ -13,6 +13,10 @@ def run_tabular_baseline():
     X = df[cfg.tab_feats].values
     y = df[cfg.target].values
 
+    
+    # This aligns the baseline with your main model's preprocessing
+    y = np.log1p(y)
+
     # scale features
     scaler = StandardScaler()
     X = scaler.fit_transform(X)
@@ -43,4 +47,5 @@ def run_tabular_baseline():
     return model, scaler
 
 if __name__ == "__main__":
-    print(run_tabular_baseline())
+    # CHANGE 2: Removed print() so it looks cleaner in the terminal
+    run_tabular_baseline()
